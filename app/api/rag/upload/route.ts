@@ -6,7 +6,7 @@ import os from "os";
 import pool from "@/lib/db";
 import { Buffer } from "buffer";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY || '' });
+const ai = new GoogleGenAI({ apiKey: process.env.GOOGLE_API_KEY || process.env.API_KEY || '' });
 
 export async function POST(req: Request) {
     try {
