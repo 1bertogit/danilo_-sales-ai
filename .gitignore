@@ -27,3 +27,9 @@ out/
 *.sln
 *.sw?
 .vercel
+
+# clerk configuration (can include secrets)
+/.clerk/
+
+# Duplicate/legacy directories
+/danilo_-sales-ai/

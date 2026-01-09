@@ -2,28 +2,333 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ═══════════════════════════════════════════════════════════════
+   DANILO SALES OS - Premium Design System
+   "Luminous Jade" Theme
+   ═══════════════════════════════════════════════════════════════ */
+
+@layer base {
+  :root {
+    /* Jade color system */
+    --jade-50: 166 76% 97%;
+    --jade-100: 167 85% 89%;
+    --jade-200: 168 84% 78%;
+    --jade-300: 171 77% 64%;
+    --jade-400: 172 66% 50%;
+    --jade-500: 173 80% 40%;
+    --jade-600: 175 84% 32%;
+    --jade-700: 175 77% 26%;
+    --jade-800: 176 69% 22%;
+    --jade-900: 176 61% 19%;
+
+    /* Surface warmth */
+    --surface-bg: 60 9% 98%;
+    --surface-card: 0 0% 100%;
+    --surface-border: 30 6% 90%;
+
+    /* Typography */
+    --text-primary: 20 14% 10%;
+    --text-secondary: 25 5% 45%;
+    --text-muted: 25 4% 64%;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply font-body bg-surface-50 text-surface-900;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  /* Premium heading styles */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-semibold tracking-tight;
+  }
+}
+
+@layer components {
+  /* ─────────────────────────────────────────────────────────────
+     Glass Cards
+     ───────────────────────────────────────────────────────────── */
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-xl border border-surface-200/60
+           shadow-card rounded-2xl;
+  }
+
+  .glass-card-hover {
+    @apply glass-card transition-all duration-300 ease-smooth
+           hover:shadow-card-hover hover:border-surface-300/80
+           hover:-translate-y-0.5;
+  }
+
+  /* ─────────────────────────────────────────────────────────────
+     Premium Buttons
+     ───────────────────────────────────────────────────────────── */
+  .btn-jade {
+    @apply inline-flex items-center justify-center gap-2
+           px-5 py-2.5 rounded-xl font-medium text-sm
+           bg-jade-gradient text-white
+           shadow-jade transition-all duration-200 ease-smooth
+           hover:shadow-jade-lg hover:-translate-y-0.5
+           active:translate-y-0 active:shadow-jade
+           disabled:opacity-50 disabled:pointer-events-none;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2
+           px-4 py-2 rounded-xl font-medium text-sm
+           text-surface-600 bg-transparent
+           border border-transparent
+           transition-all duration-200 ease-smooth
+           hover:bg-surface-100 hover:text-surface-800
+           active:bg-surface-200;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2
+           px-4 py-2 rounded-xl font-medium text-sm
+           text-jade-700 bg-white
+           border border-jade-200
+           shadow-sm transition-all duration-200 ease-smooth
+           hover:bg-jade-50 hover:border-jade-300 hover:shadow-jade
+           active:bg-jade-100;
+  }
+
+  /* ─────────────────────────────────────────────────────────────
+     Input Fields
+     ───────────────────────────────────────────────────────────── */
+  .input-premium {
+    @apply w-full px-4 py-3 rounded-xl
+           bg-white border border-surface-200
+           text-surface-800 placeholder:text-surface-400
+           shadow-inner-glow
+           transition-all duration-200 ease-smooth
+           focus:outline-none focus:border-jade-400 focus:ring-2
+           focus:ring-jade-100 focus:shadow-jade;
+  }
+
+  /* ─────────────────────────────────────────────────────────────
+     Temperature Badges
+     ───────────────────────────────────────────────────────────── */
+  .badge-hot {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full
+           text-xs font-semibold
+           bg-gradient-to-r from-orange-50 to-red-50
+           text-red-700 border border-red-200/60;
+  }
+
+  .badge-warm {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full
+           text-xs font-semibold
+           bg-gradient-to-r from-amber-50 to-yellow-50
+           text-amber-700 border border-amber-200/60;
+  }
+
+  .badge-cold {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full
+           text-xs font-semibold
+           bg-gradient-to-r from-blue-50 to-cyan-50
+           text-blue-700 border border-blue-200/60;
+  }
+
+  /* ─────────────────────────────────────────────────────────────
+     Stage Pills
+     ───────────────────────────────────────────────────────────── */
+  .pill-stage {
+    @apply inline-flex items-center px-2 py-0.5 rounded-md
+           text-[11px] font-medium uppercase tracking-wide
+           bg-surface-100 text-surface-500;
+  }
+
+  .pill-stage-active {
+    @apply bg-jade-100 text-jade-700;
+  }
+
+  /* ─────────────────────────────────────────────────────────────
+     Chat Bubbles
+     ───────────────────────────────────────────────────────────── */
+  .chat-bubble-user {
+    @apply max-w-[75%] px-5 py-3.5 rounded-2xl rounded-tr-md
+           bg-jade-gradient text-white shadow-jade;
+  }
+
+  .chat-bubble-ai {
+    @apply max-w-[75%] px-5 py-4 rounded-2xl rounded-tl-md
+           bg-white border border-surface-200 text-surface-800
+           shadow-card;
+  }
+
+  /* ─────────────────────────────────────────────────────────────
+     Sidebar Styles
+     ───────────────────────────────────────────────────────────── */
+  .sidebar {
+    @apply w-80 h-screen flex flex-col
+           bg-surface-gradient border-r border-surface-200;
+  }
+
+  .sidebar-header {
+    @apply p-5 border-b border-surface-200;
+  }
+
+  .sidebar-section {
+    @apply px-3 py-4;
+  }
+
+  .sidebar-section-title {
+    @apply flex items-center gap-2 px-3 mb-3
+           text-[11px] font-semibold uppercase tracking-wider
+           text-surface-400;
+  }
+
+  /* ─────────────────────────────────────────────────────────────
+     Lead Card Item
+     ───────────────────────────────────────────────────────────── */
+  .lead-card {
+    @apply p-3.5 rounded-xl cursor-pointer
+           transition-all duration-200 ease-smooth
+           border border-transparent
+           hover:bg-white hover:border-surface-200 hover:shadow-card;
+  }
+
+  .lead-card-selected {
+    @apply bg-jade-gradient text-white shadow-jade
+           border-transparent;
+  }
+
+  /* ─────────────────────────────────────────────────────────────
+     Task Card
+     ───────────────────────────────────────────────────────────── */
+  .task-card {
+    @apply p-4 rounded-xl bg-white
+           border border-surface-200 shadow-card
+           cursor-pointer transition-all duration-200 ease-smooth
+           hover:shadow-card-hover hover:border-jade-200;
+  }
+
+  .task-urgent {
+    @apply border-l-4 border-l-red-400;
+  }
+
+  /* ─────────────────────────────────────────────────────────────
+     Avatar
+     ───────────────────────────────────────────────────────────── */
+  .avatar-ai {
+    @apply w-9 h-9 rounded-xl flex items-center justify-center
+           bg-jade-gradient text-white font-display font-bold
+           shadow-jade;
+  }
+
+  .avatar-user {
+    @apply w-9 h-9 rounded-xl flex items-center justify-center
+           bg-surface-100 text-surface-600 font-display font-bold;
+  }
+}
+
 @layer utilities {
+  /* Custom scrollbar */
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(168, 162, 158, 0.4) transparent;
+  }
+
   .custom-scrollbar::-webkit-scrollbar {
     width: 6px;
     height: 6px;
   }
+
   .custom-scrollbar::-webkit-scrollbar-track {
     background: transparent;
   }
+
   .custom-scrollbar::-webkit-scrollbar-thumb {
-    background-color: rgba(156, 163, 175, 0.5);
-    border-radius: 20px;
+    background-color: rgba(168, 162, 158, 0.4);
+    border-radius: 9999px;
   }
+
   .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(156, 163, 175, 0.8);
+    background-color: rgba(168, 162, 158, 0.6);
+  }
+
+  /* Text gradient */
+  .text-jade-gradient {
+    @apply bg-jade-gradient bg-clip-text text-transparent;
+  }
+
+  /* Shimmer loading effect */
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.5) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s linear infinite;
+  }
+
+  /* Staggered animation delays */
+  .delay-75 { animation-delay: 75ms; }
+  .delay-150 { animation-delay: 150ms; }
+  .delay-225 { animation-delay: 225ms; }
+  .delay-300 { animation-delay: 300ms; }
+  .delay-375 { animation-delay: 375ms; }
+  .delay-450 { animation-delay: 450ms; }
+
+  /* Typing indicator dots */
+  .typing-dot {
+    @apply w-2 h-2 rounded-full bg-jade-500;
+    animation: typing 1.4s ease-in-out infinite;
+  }
+
+  .typing-dot:nth-child(1) { animation-delay: 0ms; }
+  .typing-dot:nth-child(2) { animation-delay: 200ms; }
+  .typing-dot:nth-child(3) { animation-delay: 400ms; }
+
+  /* Focus ring */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-jade-400/50
+           focus:ring-offset-2 focus:ring-offset-white;
+  }
+
+  /* No select */
+  .no-select {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  /* Mesh background */
+  .bg-mesh {
+    background-image:
+      radial-gradient(circle at 20% 20%, rgba(13, 148, 136, 0.04) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(13, 148, 136, 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 40% 60%, rgba(13, 148, 136, 0.02) 0%, transparent 40%);
   }
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+/* Animate on scroll reveal */
+@media (prefers-reduced-motion: no-preference) {
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .animate-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.animate-fadeIn {
-  animation: fadeIn 0.5s ease-out forwards;
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

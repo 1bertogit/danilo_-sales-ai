@@ -3,10 +3,26 @@ import pool from '@/lib/db';
 
 export async function GET() {
     try {
+        // Verifica se DATABASE_URL está configurado
+        if (!process.env.DATABASE_URL) {
+            console.error('DATABASE_URL não está configurado');
+            return NextResponse.json(
+                { error: 'Database configuration missing' }, 
+                { status: 500 }
+            );
+        }
+
         const { rows } = await pool.query('SELECT * FROM leads ORDER BY last_contact DESC');
         return NextResponse.json(rows);
     } catch (error) {
-        return NextResponse.json({ error: 'Failed to fetch leads' }, { status: 500 });
+        console.error('Leads API Error:', error);
+        return NextResponse.json(
+            { 
+                error: 'Failed to fetch leads',
+                details: error instanceof Error ? error.message : 'Unknown error'
+            }, 
+            { status: 500 }
+        );
     }
 }
 

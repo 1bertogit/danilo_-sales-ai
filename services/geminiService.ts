@@ -36,6 +36,13 @@ export async function uploadToRagStore(ragStoreName: string, file: File): Promis
     if (!response.ok) throw new Error("Failed to upload file");
 }
 
+export async function uploadDocuments(ragStoreName: string, files: File[]): Promise<void> {
+    // Upload each file sequentially to avoid overwhelming the server
+    for (const file of files) {
+        await uploadToRagStore(ragStoreName, file);
+    }
+}
+
 export async function fileSearch(ragStoreName: string, query: string, leadProfile?: Lead): Promise<QueryResult> {
     // Chama a rota segura do servidor que detém a API KEY e o Prompt do Sales OS
     const response = await fetch('/api/ai/reply', {
@@ -77,12 +84,8 @@ export async function deleteRagStore(ragStoreName: string): Promise<void> {
 // Novos métodos para o CRM
 export async function fetchLeads(): Promise<Lead[]> {
     const response = await fetch('/api/leads');
-    if (!response.ok) return [];
-    return response.json();
-}
-
-export async function fetchTasks(): Promise<Task[]> {
-    const response = await fetch('/api/tasks');
-    if (!response.ok) return [];
+    if (!response.ok) {
+        throw new Error("Failed to fetch leads");
+    }
     return response.json();
 }
