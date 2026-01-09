@@ -1,0 +1,1 @@
+// Deleted for Next.js Migration. See app/page.tsx
