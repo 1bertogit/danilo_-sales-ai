@@ -5,6 +5,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
+import DOMPurify from 'dompurify';
 import { ChatMessage, LeadProfile, Lead } from '../types';
 import Spinner from './Spinner';
 import SendIcon from './icons/SendIcon';
@@ -120,7 +121,13 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
         flushPara();
         flushList();
 
-        return { __html: html };
+        // Sanitize HTML to prevent XSS attacks
+        const sanitizedHtml = DOMPurify.sanitize(html, {
+            ALLOWED_TAGS: ['p', 'strong', 'em', 'code', 'h2', 'h3', 'ol', 'ul', 'li', 'blockquote', 'br'],
+            ALLOWED_ATTR: ['class']
+        });
+
+        return { __html: sanitizedHtml };
     };
 
 
